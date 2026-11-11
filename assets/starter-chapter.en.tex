@@ -1,0 +1,44 @@
+% STARTER CHAPTER -- smoke test for the toolchain. Delete after the first clean build.
+\chapter{Starter: Bloch's Theorem}
+\label{ch:starter}
+\srcref{Kittel, Ch.~7; Ashcroft--Mermin, Ch.~8}
+
+\lecturetag{2026-01-01}{L1}
+
+\section{An electron in a periodic potential}
+\label{sec:starter-bloch}
+
+Understanding how electrons move inside a crystal's periodic potential underpins every modern semiconductor device—from microprocessor transistors to solar cells and LEDs—because the electronic band gaps that distinguish metals from insulators around us emerge directly from lattice translational symmetry.
+
+We study a single electron moving in the potential $U(\vb{r})$ of a perfect crystal, so that $U(\vb{r}+\vb{R})=U(\vb{r})$ for every Bravais lattice vector $\vb{R}$.
+
+\begin{definition}[Bravais lattice]\label{def:starter-bravais}
+A \term{}{Bravais lattice} is the set of points $\vb{R}=n_1\vb{a}_1+n_2\vb{a}_2+n_3\vb{a}_3$ with $n_i\in\mathbb{Z}$ and $\vb{a}_i$ linearly independent.
+\end{definition}
+
+\begin{theorem}[Bloch]\label{thm:starter-bloch}
+Every eigenstate of $H=\frac{\vb{p}^2}{2m}+U(\vb{r})$ can be chosen as
+\begin{equation}\label{eq:starter-bloch}
+  \psi_{n\vb{k}}(\vb{r}) = \ee^{\ii\vb{k}\cdot\vb{r}}\,u_{n\vb{k}}(\vb{r}),\qquad u_{n\vb{k}}(\vb{r}+\vb{R})=u_{n\vb{k}}(\vb{r}).
+\end{equation}
+\end{theorem}
+
+\begin{supplement}[Ashcroft--Mermin, Ch.~8]
+Sketch of the proof: the translation operators $T_{\vb{R}}$ commute with $H$ and with each other, so they can be diagonalised simultaneously with $H$. Their eigenvalues have the form $\ee^{\ii\vb{k}\cdot\vb{R}}$, which gives \eqref{eq:starter-bloch}.
+\end{supplement}
+
+\begin{supplement}
+Derived check: for $U=0$ we get $u=\mathrm{const}$ and $E=\hbar^2k^2/2m$, the free-electron limit. Dimensions: $\hbar^2k^2/2m$ has units of energy.
+\end{supplement}
+
+\begin{discrepancy}
+Example box: the lecture wrote $E=\hbar k^2/2m$; both sources give $\hbar^2k^2/2m$. These notes use the latter.
+\end{discrepancy}
+
+\begin{todobox}
+Example box: the board shows an unreadable symbol in the dispersion sketch; confirm whether it is $\kappa$ or $k$.
+\end{todobox}
+
+\begin{summarybox}
+Bloch states: plane wave times lattice-periodic function, labelled by crystal momentum $\vb{k}$ and band index $n$.
+\end{summarybox}

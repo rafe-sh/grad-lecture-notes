@@ -1,0 +1,44 @@
+% STARTER CHAPTER -- smoke test for the toolchain. Delete after the first clean build.
+\chapter{نمونهٔ آغازین: قضیهٔ بلوخ}
+\label{ch:starter}
+\srcref{Kittel, Ch. 7; Ashcroft--Mermin, Ch. 8}
+
+\lecturetag{2026-01-01}{L1}
+
+\section{الکترون در پتانسیل تناوبی}
+\label{sec:starter-bloch}
+
+درک رفتار الکترون‌ها در پتانسیل تناوبی یک بلور، اساس طراحی تمام قطعات نیم‌رسانای نوین — از ترانزیستورهای ریزپردازنده‌ها گرفته تا سلول‌های خورشیدی و دیودهای نورگسیل — را تشکیل می‌دهد؛ زیرا شکاف انرژی نواری که رسانایی یا عایق بودن جامدات پیرامون ما را تعیین می‌کند مستقیماً از همین تقارن شبکه‌ای برمی‌خیزد.
+
+حرکت یک الکترون را در پتانسیل $U(\vb{r})$ یک بلور کامل بررسی می‌کنیم، به‌طوری‌که برای هر بردار شبکهٔ براوه $\vb{R}$ داشته باشیم $U(\vb{r}+\vb{R})=U(\vb{r})$.
+
+\begin{definition}[شبکهٔ براوه]\label{def:starter-bravais}
+\term{شبکهٔ براوه}{Bravais lattice} مجموعهٔ نقاطی به شکل $\vb{R}=n_1\vb{a}_1+n_2\vb{a}_2+n_3\vb{a}_3$ است، که در آن $n_i\in\mathbb{Z}$ و بردارهای $\vb{a}_i$ مستقل خطی‌اند.
+\end{definition}
+
+\begin{theorem}[بلوخ]\label{thm:starter-bloch}
+هر ویژه‌حالت هامیلتونی $H=\frac{\vb{p}^2}{2m}+U(\vb{r})$ را می‌توان به شکل زیر انتخاب کرد:
+\begin{equation}\label{eq:starter-bloch}
+  \psi_{n\vb{k}}(\vb{r}) = \ee^{\ii\vb{k}\cdot\vb{r}}\,u_{n\vb{k}}(\vb{r}),\qquad u_{n\vb{k}}(\vb{r}+\vb{R})=u_{n\vb{k}}(\vb{r}).
+\end{equation}
+\end{theorem}
+
+\begin{supplement}[Ashcroft--Mermin, Ch.~8]
+طرح اثبات: عملگرهای انتقال $T_{\vb{R}}$ با $H$ و با یکدیگر جابه‌جا می‌شوند؛ پس می‌توان آن‌ها را هم‌زمان با $H$ قطری کرد. مقادیر ویژهٔ آن‌ها به شکل $\ee^{\ii\vb{k}\cdot\vb{R}}$ است و از آن رابطهٔ \eqref{eq:starter-bloch} نتیجه می‌شود.
+\end{supplement}
+
+\begin{supplement}
+بررسی استنتاجی: برای $U=0$ داریم $u=\fa{ثابت}$ و $E=\hbar^2k^2/2m$ که همان حد الکترون آزاد است. یکای $\hbar^2k^2/2m$ انرژی است.
+\end{supplement}
+
+\begin{discrepancy}
+نمونه: در کلاس $E=\hbar k^2/2m$ نوشته شد؛ هر دو مرجع $\hbar^2k^2/2m$ می‌دهند و در این جزوه همین شکل به کار می‌رود.
+\end{discrepancy}
+
+\begin{todobox}
+نمونه: نماد روی نمودار پاشندگی در عکس تخته خوانا نیست؛ بررسی شود که $\kappa$ است یا $k$.
+\end{todobox}
+
+\begin{summarybox}
+حالت‌های بلوخ حاصل‌ضرب موج تخت در تابعی با تناوب شبکه‌اند و با تکانهٔ بلوری $\vb{k}$ و شاخص نوار $n$ برچسب می‌خورند.
+\end{summarybox}

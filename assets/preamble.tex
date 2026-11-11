@@ -1,0 +1,150 @@
+% ============================================================================
+% preamble.tex -- shared look and environments for grad-lecture-notes
+% Loaded from main.tex right after \documentclass{report}.
+% main.tex must define before loading this file:
+%   \newif\ifnotesfa  (then \notesfatrue or \notesfafalse)
+%   \coursetitle, \coursecode, \semester, \authorname
+% Compile with XeLaTeX. In Persian mode xepersian must stay the LAST package.
+% ============================================================================
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.2cm,right=2.2cm,headheight=16pt]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+\usepackage{booktabs,array,graphicx,xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.markings,patterns}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=teal!60!black]{hyperref}
+
+% ----------------------------------------------------------------------------
+% Language layer (xepersian is the last \usepackage)
+% ----------------------------------------------------------------------------
+\ifnotesfa
+  \usepackage{xepersian}
+  \IfFontExistsTF{IRNazanin}{\settextfont{IRNazanin}\setdigitfont{IRNazanin}}%
+    {\IfFontExistsTF{Vazirmatn}{\settextfont{Vazirmatn}\setdigitfont{Vazirmatn}}%
+      {\settextfont{DejaVu Serif}\setdigitfont{DejaVu Serif}}}
+  \IfFontExistsTF{IRLotus}{\defpersianfont\titlefont{IRLotus}}%
+    {\IfFontExistsTF{Vazirmatn}{\defpersianfont\titlefont{Vazirmatn}}{\defpersianfont\titlefont{DejaVu Sans}}}
+  \IfFontExistsTF{Times New Roman}{\setlatintextfont{Times New Roman}}%
+    {\IfFontExistsTF{TeX Gyre Termes}{\setlatintextfont{TeX Gyre Termes}}{\setlatintextfont{Latin Modern Roman}}}
+  \newcommand{\fa}[1]{\text{\rl{#1}}}
+  \newcommand{\en}[1]{\lr{#1}}
+  \newcommand{\term}[2]{#1~(\lr{#2})}
+  % names
+  \newcommand{\nDef}{تعریف}      \newcommand{\nThm}{قضیه}
+  \newcommand{\nLem}{لم}         \newcommand{\nProp}{گزاره}
+  \newcommand{\nCor}{نتیجه}      \newcommand{\nEx}{مثال}
+  \newcommand{\nRem}{یادداشت}    \newcommand{\nProof}{اثبات}
+  \newcommand{\nSupp}{افزودهٔ تکمیلی}
+  \newcommand{\nDerived}{استنتاجِ نگارنده}
+  \newcommand{\nDisc}{ناسازگاری}
+  \newcommand{\nTodo}{نیازمند بررسی}
+  \newcommand{\nSum}{خلاصه}
+  \newcommand{\nSrc}{مرجع}
+  \newcommand{\thmbodyfont}{\normalfont}
+\else
+  \providecommand{\lr}[1]{#1}
+  \providecommand{\rl}[1]{#1}
+  \newcommand{\titlefont}{\sffamily}
+  \newcommand{\fa}[1]{\text{#1}}
+  \newcommand{\en}[1]{#1}
+  \newcommand{\term}[2]{\emph{#2}}
+  \newcommand{\nDef}{Definition}   \newcommand{\nThm}{Theorem}
+  \newcommand{\nLem}{Lemma}        \newcommand{\nProp}{Proposition}
+  \newcommand{\nCor}{Corollary}    \newcommand{\nEx}{Example}
+  \newcommand{\nRem}{Remark}       \newcommand{\nProof}{Proof}
+  \newcommand{\nSupp}{Supplement}
+  \newcommand{\nDerived}{derived by the note-taker}
+  \newcommand{\nDisc}{Discrepancy}
+  \newcommand{\nTodo}{Needs checking}
+  \newcommand{\nSum}{Summary}
+  \newcommand{\nSrc}{Reference}
+  \newcommand{\thmbodyfont}{\itshape}
+\fi
+
+% ----------------------------------------------------------------------------
+% Colors
+% ----------------------------------------------------------------------------
+\definecolor{accent}{RGB}{30,70,140}
+\definecolor{suppcol}{RGB}{20,110,110}
+\definecolor{disccol}{RGB}{170,40,40}
+\definecolor{todocol}{RGB}{200,130,20}
+\definecolor{sumcol}{RGB}{90,90,90}
+
+% ----------------------------------------------------------------------------
+% Theorem-like environments: lecture content, plain (no box)
+% ----------------------------------------------------------------------------
+\newtheoremstyle{notesdef}{9pt}{9pt}{\normalfont}{0pt}{\bfseries\color{accent}}{.}{0.6em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{notesthm}{9pt}{9pt}{\thmbodyfont}{0pt}{\bfseries\color{accent}}{.}{0.6em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\newtheoremstyle{notesrem}{9pt}{9pt}{\normalfont}{0pt}{\bfseries\color{sumcol}}{.}{0.6em}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{notesdef}
+\newtheorem{definition}{\nDef}[chapter]
+\newtheorem{example}[definition]{\nEx}
+\theoremstyle{notesthm}
+\newtheorem{theorem}[definition]{\nThm}
+\newtheorem{lemma}[definition]{\nLem}
+\newtheorem{proposition}[definition]{\nProp}
+\newtheorem{corollary}[definition]{\nCor}
+\theoremstyle{notesrem}
+\newtheorem{remark}[definition]{\nRem}
+\renewcommand{\proofname}{\nProof}
+\numberwithin{equation}{chapter}
+
+% ----------------------------------------------------------------------------
+% Provenance boxes: everything that is NOT the lecturer
+% ----------------------------------------------------------------------------
+\tcbset{notebox/.style={enhanced,breakable,arc=1.2mm,boxrule=0.7pt,
+  left=7pt,right=7pt,top=4pt,bottom=4pt,before skip=9pt,after skip=9pt,
+  fonttitle=\bfseries\titlefont\small,coltitle=white,toptitle=2pt,bottomtitle=2pt}}
+
+\newcommand{\supptitle}[1]{\def\supptmp{#1}\ifx\supptmp\empty\nSupp\ --- \nDerived\else\nSupp\ --- \lr{#1}\fi}
+\newtcolorbox{supplement}[1][]{notebox,colback=suppcol!5!white,colframe=suppcol,title={\supptitle{#1}}}
+\newtcolorbox{discrepancy}{notebox,colback=disccol!5!white,colframe=disccol,title={\nDisc}}
+\newtcolorbox{todobox}{notebox,colback=todocol!8!white,colframe=todocol,title={\nTodo}}
+\newtcolorbox{summarybox}{notebox,colback=sumcol!5!white,colframe=sumcol,title={\nSum}}
+
+% ----------------------------------------------------------------------------
+% Helpers
+% ----------------------------------------------------------------------------
+\newcommand{\lecturetag}[2]{\par\vspace{0.7em}\noindent{\small\color{gray}\hrulefill\ \lr{#1}\ \textendash\ \lr{#2}\ \hrulefill}\par\nobreak\vspace{0.4em}}
+\newcommand{\srcref}[1]{\par\noindent{\small\color{gray}\nSrc: \lr{#1}}\par\vspace{0.3em}}
+
+% Physics macros (course-specific ones go in macros.tex)
+\newcommand{\ket}[1]{\left|#1\right\rangle}
+\newcommand{\bra}[1]{\left\langle#1\right|}
+\newcommand{\braket}[2]{\left\langle#1\middle|#2\right\rangle}
+\newcommand{\expval}[1]{\left\langle#1\right\rangle}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\vb}[1]{\mathbf{#1}}
+\newcommand{\pdv}[3][]{%
+  \frac{\partial\if\relax\detokenize{#1}\relax\else^{#1}\fi #2}%
+       {\partial #3\if\relax\detokenize{#1}\relax\else^{#1}\fi}%
+}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\hc}{\text{h.c.}}
+\providecommand{\angstrom}{\text{\lr{\AA}}}
+
+% ----------------------------------------------------------------------------
+% Headings and page style
+% ----------------------------------------------------------------------------
+\titleformat{\chapter}[hang]{\Huge\titlefont\bfseries\color{accent}}{\thechapter}{0.7em}{}
+\titlespacing*{\chapter}{0pt}{0pt}{22pt}
+\titleformat{\section}{\Large\titlefont\bfseries\color{accent}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\titlefont\bfseries\color{suppcol}}{\thesubsection}{0.8em}{}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\rhead{\small\titlefont\coursetitle}
+\lhead{\small\titlefont\leftmark}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancypagestyle{plain}{\fancyhf{}\cfoot{\thepage}\renewcommand{\headrulewidth}{0pt}}
+\setlength{\parskip}{0.3em}

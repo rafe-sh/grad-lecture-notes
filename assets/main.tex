@@ -1,0 +1,37 @@
+% !TEX program = xelatex
+\documentclass[12pt,a4paper]{report}
+
+\newif\ifnotesfa
+\notesfa__FA_FLAG__          % \notesfatrue = Persian + English terms, \notesfafalse = English only
+
+% Note for Persian mode (\notesfatrue): wrap pure Latin/ASCII fields (e.g. \lr{PHYS-501}, \lr{1405-1})
+% in \lr{...}, while keeping Persian fields containing parentheses (e.g. نیم‌سال ۱۴۰۵-۱ (پاییز ۲۰۲۶)) unwrapped.
+\newcommand{\coursetitle}{__TITLE__}
+\newcommand{\coursecode}{__CODE__}
+\newcommand{\semester}{__SEMESTER__}
+\newcommand{\authorname}{__AUTHOR__}
+
+\input{preamble}
+\input{macros}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\Huge\titlefont\bfseries\color{accent}\coursetitle\par}
+  \vspace{1cm}
+  {\Large\titlefont\coursecode\par}
+  \vspace{0.5cm}
+  {\large\titlefont\semester\par}
+  \vfill
+  {\large\titlefont\authorname\par}
+  \vspace{1cm}
+\end{titlepage}
+
+\tableofcontents
+
+% CHAPTERS-BEGIN
+% CHAPTERS-END
+
+\end{document}
